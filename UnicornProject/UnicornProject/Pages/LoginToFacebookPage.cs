@@ -6,7 +6,7 @@ using UnicornProject.Selenium;
 
 namespace UnicornProject.Pages
 {
-    public class LoginToFacebookPage: BasePage
+    public class LoginToFacebookPage: TopHeader
     {
 
         IWebElement LoginInputId => Driver.FindElement(By.Id("email"));
