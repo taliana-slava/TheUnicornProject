@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnicornProject.Selenium;
+using UnicornProject.TestData;
 
 namespace UnicornProject.Pages
 {
@@ -25,10 +26,10 @@ namespace UnicornProject.Pages
             PasswordInputId.SendKeys(value);
         }
 
-        public void LoginToFacebook(string login, string password)
+        public void LoginToFacebook(User user)
         {
-            SetLogin(login);
-            SetPassword(password);
+            SetLogin(user.Login);
+            SetPassword(user.Password);
             LoginButton.Click();
         }
 

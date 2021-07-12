@@ -48,15 +48,14 @@ namespace UnicornProject.UITests
 
         public void Launch()
         {
-            var user = new UserRepository().GetDefaultUser();           
-            var facebook = new LoginToFacebookPage();
-            facebook.LoginToFacebook(user.Login, user.Password);
+            var user = new UserRepository().GetDefaultUser();   
+            new LoginToFacebookPage().LoginToFacebook(user);
         }
 
         public void Launch(User user)
         {
             var facebook = new LoginToFacebookPage();
-            facebook.LoginToFacebook(user.Login, user.Password);
+            facebook.LoginToFacebook(user);
         }
     }
 }

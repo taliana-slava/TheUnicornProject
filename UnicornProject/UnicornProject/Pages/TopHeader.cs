@@ -6,7 +6,7 @@ using UnicornProject.Selenium;
 
 namespace UnicornProject.Pages
 {
-    public abstract class TopHeader: BasePage
+    public abstract class TopHeader
     {
 
         IWebElement AccountIconXpath => Driver.FindElement(By.XPath("//*[@aria-label='Account']/../.."));
