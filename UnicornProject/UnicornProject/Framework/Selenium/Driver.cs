@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using UnicornProject.Framework;
 
 namespace UnicornProject.Selenium
 {
@@ -16,6 +17,7 @@ namespace UnicornProject.Selenium
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArguments("--disable-notifications"); // to disable notification
+            FW.Log.Info("Browser: Chrome");
             _driver = new ChromeDriver(Path.GetFullPath(@"../"), options);
         }
 

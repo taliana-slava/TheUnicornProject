@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnicornProject.Framework;
 using UnicornProject.Pages;
 using UnicornProject.Selenium;
 using UnicornProject.TestData;
@@ -14,10 +15,19 @@ namespace UnicornProject.UITests
     {
         private readonly string FACEBOOK_URL = Environment.GetEnvironmentVariable("Facebook");
 
+        [OneTimeSetUp]
+        public void BeforeAll()
+        {
+            FW.CreateTestResultsDirectory();
+        
+        }
+
         [SetUp]
         public void BeforeEach()
         {
+            FW.SetLogger();
             Driver.Init();
+            FW.Log.Info(FACEBOOK_URL);
             Driver.Current.Url = FACEBOOK_URL;
         }
 
@@ -36,6 +46,7 @@ namespace UnicornProject.UITests
             {
                 if (Driver.Current != null)
                 {
+                    FW.Log.Info("Close Brower");
                     Driver.Current.Quit();
                 }
             }

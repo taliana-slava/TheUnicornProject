@@ -1,13 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NUnit.Framework;
+using System;
 using System.IO;
-using System.Text;
+using UnicornProject.Framework.Logging;
 
 namespace UnicornProject.Framework
 {
     public class FW
     {
         public static string WORKSPACE_DIRECTORY = Path.GetFullPath(@"../");
+
+        public static Logger Log => _logger ?? throw new NullReferenceException("_logger is null. SetLogger() first!");
+
+        [ThreadStatic]
+        public static DirectoryInfo CurrentTestDirectory;
+
+        [ThreadStatic]
+        private static Logger _logger;
+
 
         public static DirectoryInfo CreateTestResultsDirectory()
         {
@@ -21,5 +30,27 @@ namespace UnicornProject.Framework
             return Directory.CreateDirectory(testDirectory);
         }
 
+        public static void SetLogger()
+        {
+            lock(_setLoggerLock)
+            {
+                var testResultsDir = WORKSPACE_DIRECTORY + "TestResults";
+                var testName = TestContext.CurrentContext.Test.Name;
+                var fullPath = $"{testResultsDir}/{testName}";
+
+                if(Directory.Exists(fullPath))
+                {
+                    CurrentTestDirectory = Directory.CreateDirectory(fullPath + TestContext.CurrentContext.Test.ID);
+                }
+                else
+                {
+                    CurrentTestDirectory = Directory.CreateDirectory(fullPath);
+                }
+                
+                _logger = new Logger(testName, CurrentTestDirectory.FullName + "/log.txt");
+            }
+        }
+
+        private static object _setLoggerLock = new object();
     }
 }

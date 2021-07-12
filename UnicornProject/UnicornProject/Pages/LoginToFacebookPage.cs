@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using UnicornProject.Framework;
 using UnicornProject.Selenium;
 using UnicornProject.TestData;
 
@@ -16,12 +17,14 @@ namespace UnicornProject.Pages
 
         public void SetLogin(string value)
         {
+            FW.Log.Step("Set Login");
             LoginInputId.SendKeys(Keys.Clear);
             LoginInputId.SendKeys(value);
         }
 
         public void SetPassword(string value)
         {
+            FW.Log.Step("Set Password");
             PasswordInputId.SendKeys(Keys.Clear);
             PasswordInputId.SendKeys(value);
         }
@@ -30,6 +33,7 @@ namespace UnicornProject.Pages
         {
             SetLogin(user.Login);
             SetPassword(user.Password);
+            FW.Log.Step("Click Login button");
             LoginButton.Click();
         }
 
