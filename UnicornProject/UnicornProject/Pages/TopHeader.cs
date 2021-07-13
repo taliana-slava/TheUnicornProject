@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using UnicornProject.Framework.Selenium;
 using UnicornProject.Selenium;
 
 namespace UnicornProject.Pages
@@ -9,8 +7,8 @@ namespace UnicornProject.Pages
     public abstract class TopHeader
     {
 
-        IWebElement AccountIconXpath => Driver.FindElement(By.XPath("//*[@aria-label='Account']/../.."));
-        IWebElement LogOutButtonXpath => Driver.FindElement(By.XPath("//*[text()='Log Out']/.."));
+        Element AccountIconXpath => Driver.FindElement(By.XPath("//*[@aria-label='Account']/../.."), "Account Icon");
+        Element LogOutButtonXpath => Driver.FindElement(By.XPath("//*[text()='Log Out']/.."), "Log Out Button");
 
         public void ExpandAccountIcon()
         {

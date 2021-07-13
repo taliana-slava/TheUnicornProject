@@ -1,8 +1,5 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using UnicornProject.Framework;
+using UnicornProject.Framework.Selenium;
 using UnicornProject.Selenium;
 using UnicornProject.TestData;
 
@@ -11,21 +8,17 @@ namespace UnicornProject.Pages
     public class LoginToFacebookPage: TopHeader
     {
 
-        IWebElement LoginInputId => Driver.FindElement(By.Id("email"));
-        IWebElement PasswordInputId => Driver.FindElement(By.Id("pass"));
-        IWebElement LoginButton => Driver.FindElement(By.Name("login"));
+        Element LoginInputId => Driver.FindElement(By.Id("email"), "Login");
+        Element PasswordInputId => Driver.FindElement(By.Id("pass"), "Password");
+        Element LoginButton => Driver.FindElement(By.Name("login"), "Login Button");
 
         public void SetLogin(string value)
         {
-            FW.Log.Step("Set Login");
-            LoginInputId.SendKeys(Keys.Clear);
             LoginInputId.SendKeys(value);
         }
 
         public void SetPassword(string value)
         {
-            FW.Log.Step("Set Password");
-            PasswordInputId.SendKeys(Keys.Clear);
             PasswordInputId.SendKeys(value);
         }
 
@@ -33,7 +26,6 @@ namespace UnicornProject.Pages
         {
             SetLogin(user.Login);
             SetPassword(user.Password);
-            FW.Log.Step("Click Login button");
             LoginButton.Click();
         }
 

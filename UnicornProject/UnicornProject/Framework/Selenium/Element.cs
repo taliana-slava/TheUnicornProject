@@ -11,11 +11,16 @@ namespace UnicornProject.Framework.Selenium
     {
         private readonly IWebElement _element;
 
+        public readonly string Name;
+
+        public By FoundBy { get; set; }
+
         public IWebElement Current => _element ?? throw new NullReferenceException("_element is null!");
 
-        public Element(IWebElement element)
+        public Element(IWebElement element, string name)
         {
             _element = element;
+            Name = name;
         }
 
         public string TagName => Current.TagName;
@@ -39,6 +44,7 @@ namespace UnicornProject.Framework.Selenium
 
         public void Click()
         {
+            FW.Log.Step($"Click {Name}");
             Current.Click();
         }
 
@@ -69,6 +75,7 @@ namespace UnicornProject.Framework.Selenium
 
         public void SendKeys(string text)
         {
+            FW.Log.Step($"Set {Name}");
             Current.SendKeys(text);
         }
 

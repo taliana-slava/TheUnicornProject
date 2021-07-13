@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnicornProject.Framework;
+using UnicornProject.Framework.Selenium;
 
 namespace UnicornProject.Selenium
 {
@@ -23,14 +24,21 @@ namespace UnicornProject.Selenium
 
         public static IWebDriver Current => _driver ?? throw new NullReferenceException("Driver is null!");
 
-        public static IWebElement FindElement(By by)
+
+        public static Element FindElement(By by, string elementName)
         {
-            return Current.FindElement(by);
+            return new Element(Current.FindElement(by), elementName)
+            {
+                FoundBy = by
+            };
         }
 
-        public static IList<IWebElement> FindElements(By by)
+        public static Elements FindElements(By by)
         {
-            return Current.FindElements(by);
+            return new Elements(Current.FindElements(by))
+            {
+                FoundBy = by
+        }; 
         }
     }
 }
