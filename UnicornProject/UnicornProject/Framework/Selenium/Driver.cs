@@ -16,10 +16,7 @@ namespace UnicornProject.Selenium
 
         public static void Init()
         {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArguments("--disable-notifications"); // to disable notification
-            FW.Log.Info("Browser: Chrome");
-            _driver = new ChromeDriver(Path.GetFullPath(@"../"), options);
+            _driver = DriverFactory.Build(FW.Config.Driver.Brower);
         }
 
         public static IWebDriver Current => _driver ?? throw new NullReferenceException("Driver is null!");

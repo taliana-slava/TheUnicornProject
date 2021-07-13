@@ -1,0 +1,10 @@
+﻿{
+  "driver": {
+    "brower": "chrome"
+  },
+
+  "test": {
+    "url": "https://www.facebook.com/"
+  }
+
+}

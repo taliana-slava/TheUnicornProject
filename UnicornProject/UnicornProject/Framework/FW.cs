@@ -1,21 +1,26 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using System;
 using System.IO;
 using UnicornProject.Framework.Logging;
 
 namespace UnicornProject.Framework
 {
-    public class FW
+    public static class FW
     {
         public static string WORKSPACE_DIRECTORY = Path.GetFullPath(@"../");
 
         public static Logger Log => _logger ?? throw new NullReferenceException("_logger is null. SetLogger() first!");
+        
+        public static FwConfig Config => _configuration ?? throw new NullReferenceException("_configuration is null.");
 
         [ThreadStatic]
         public static DirectoryInfo CurrentTestDirectory;
 
         [ThreadStatic]
         private static Logger _logger;
+
+        private static FwConfig _configuration;
 
 
         public static DirectoryInfo CreateTestResultsDirectory()
@@ -28,6 +33,15 @@ namespace UnicornProject.Framework
             }
 
             return Directory.CreateDirectory(testDirectory);
+        }
+
+        public static void SetConfig()
+        {
+            if(_configuration == null)
+            {
+                var jsonStr = File.ReadAllText(WORKSPACE_DIRECTORY + "../../framework-config.json");
+                _configuration = JsonConvert.DeserializeObject<FwConfig>(jsonStr);
+            }
         }
 
         public static void SetLogger()

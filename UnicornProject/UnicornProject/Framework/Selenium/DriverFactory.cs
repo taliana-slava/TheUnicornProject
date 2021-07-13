@@ -11,6 +11,7 @@ namespace UnicornProject.Framework.Selenium
     {
         public static IWebDriver Build(string browserName)
         {
+            FW.Log.Info($"Brower: {browserName}");
             switch(browserName)
             {
                 case "chrome":

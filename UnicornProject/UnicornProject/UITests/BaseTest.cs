@@ -1,9 +1,5 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using UnicornProject.Framework;
 using UnicornProject.Pages;
 using UnicornProject.Selenium;
@@ -18,6 +14,7 @@ namespace UnicornProject.UITests
         [OneTimeSetUp]
         public void BeforeAll()
         {
+            FW.SetConfig();
             FW.CreateTestResultsDirectory();
         
         }
@@ -27,8 +24,8 @@ namespace UnicornProject.UITests
         {
             FW.SetLogger();
             Driver.Init();
-            FW.Log.Info(FACEBOOK_URL);
-            Driver.Current.Url = FACEBOOK_URL;
+            FW.Log.Info(FW.Config.Test.Url);
+            Driver.Current.Url = FW.Config.Test.Url;
         }
 
         [TearDown]
