@@ -14,9 +14,13 @@ namespace UnicornProject.Selenium
         [ThreadStatic]
         private static IWebDriver _driver;
 
+        public static Window Window;
+
         public static void Init()
         {
             _driver = DriverFactory.Build(FW.Config.Driver.Brower);
+            Window = new Window();
+            Window.Maximize();
         }
 
         public static IWebDriver Current => _driver ?? throw new NullReferenceException("Driver is null!");

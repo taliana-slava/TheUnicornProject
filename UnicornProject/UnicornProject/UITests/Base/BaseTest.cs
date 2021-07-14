@@ -80,7 +80,7 @@ namespace UnicornProject.UITests
             return new HomePage();
         }
 
-        public void Launch()
+        public virtual void Launch()
         {
             var user = new UserRepository().GetDefaultUser();   
             new LoginToFacebookPage().LoginToFacebook(user);

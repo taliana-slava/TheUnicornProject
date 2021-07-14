@@ -22,7 +22,7 @@ namespace UnicornProject.Pages
 
         public void LogOut()
         {
-            //ExpandAccountIcon();
+            ExpandAccountIcon();
             ClickLogOutButton();
         }
 
