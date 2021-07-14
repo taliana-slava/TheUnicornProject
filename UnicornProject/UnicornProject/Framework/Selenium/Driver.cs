@@ -21,6 +21,30 @@ namespace UnicornProject.Selenium
 
         public static IWebDriver Current => _driver ?? throw new NullReferenceException("Driver is null!");
 
+        public static void GoTo(string url)
+        {
+            if(!url.StartsWith("http"))
+            {
+                url = $"http://{url}";
+            }
+
+            FW.Log.Info(url);
+            Current.Navigate().GoToUrl(url);
+        }
+
+        public static void Quit()
+        {
+            FW.Log.Info("Close Brower");
+            Current.Quit();
+            Current.Dispose();
+        }
+
+        public static void TakeScreenshot(string imageName)
+        {
+            var ss = ((ITakesScreenshot)Current).GetScreenshot();
+            var ssFileName = Path.Combine(FW.CurrentTestDirectory.FullName, imageName);
+            ss.SaveAsFile($"{ssFileName}.png", ScreenshotImageFormat.Png);
+        }
 
         public static Element FindElement(By by, string elementName)
         {
